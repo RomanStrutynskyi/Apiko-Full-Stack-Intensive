@@ -1,0 +1,5 @@
+mixin task2(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ''
+
+  #root(class=spec.__class)&attributes(attributes)

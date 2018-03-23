@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "babelify": "^7.3.0",
+    "generator-yeogurt": "^2.0.1",
     "gulp-babel": "^7.0.0",
     "gulp-browserify": "^0.5.1",
     "gulp-rollup": "^2.15.0",

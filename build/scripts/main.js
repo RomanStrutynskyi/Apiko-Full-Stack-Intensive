@@ -153,11 +153,54 @@ var Task1 = {
   }
 };
 
+var Task2 = {
+  id: {
+    root: 'root'
+  },
+  React: {
+    createElement: function createElement(tag) {
+      var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var children = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+      var item = document.createElement(tag);
+      var keys = Object.keys(props === null ? {} : props);
+
+      if (keys.length) keys.forEach(function (key) {
+        if (key == 'style') {
+          typeof props[key] === 'string' ? item[key] = props[key] : Object.keys(props[key]).forEach(function (style) {
+            return item.style[style] = props.style[style];
+          });
+        } else {
+          item[key] = props[key];
+        }
+      });
+
+      var append = function append(child) {
+        return typeof child === 'string' ? item.appendChild(document.createTextNode(child)) : item.appendChild(child);
+      };
+
+      if (children) [].concat(children).forEach(function (child) {
+        return append(child);
+      });
+      return item;
+    },
+    render: function render(component, container) {
+      container.appendChild(component);
+    }
+  },
+  init: function init() {
+    var app = this.React.createElement('div', { style: { backgroundColor: 'red' } }, [this.React.createElement('span', undefined, 'Hello world'), this.React.createElement('br'), 'This is just a text node', this.React.createElement('div', { textContent: 'Text content' })]);
+    this.React.render(app, document.getElementById(this.id.root));
+  }
+};
+
 console.log(Config);
 // =========================================
 // Initialization
 // =========================================
 // Module1.init();
-Task1.init();
+var currentPage = $('body').data('page');
+if (Object.is(currentPage, 'task1')) Task1.init();
+if (Object.is(currentPage, 'task2')) Task2.init();
 
 }());
