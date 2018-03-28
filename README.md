@@ -1,76 +1,92 @@
-# Template readme
+<p align="center">
+  <img alt="arclogo" src="https://cloud.githubusercontent.com/assets/3068563/23199029/55e9d55a-f8aa-11e6-91a2-74b82db3813c.png"><br><br>
+  <a href="https://github.com/diegohaz/arc/releases/latest"><img src="https://github-release-version.herokuapp.com/github/diegohaz/arc/release.svg?style=flat-square" alt="Latest release" /></a>
+  <a href="https://travis-ci.org/diegohaz/arc"><img src="https://img.shields.io/travis/diegohaz/arc/master.svg?style=flat-square" alt="Build Status" /></a>
+  <a href="https://codecov.io/gh/diegohaz/arc"><img src="https://img.shields.io/codecov/c/github/diegohaz/arc.svg?style=flat-square" alt="Coverage Status" /></a>
+  <a href="https://gitter.im/diegohaz/arc"><img src="https://img.shields.io/badge/chat-on%20gitter-1dce73.svg?style=flat-square" alt="Gitter chat" /></a>
+</p>
 
-Yeomas - based on yeogurt generator.
+**ARc** (Atomic React) is a React starter kit based on the [Atomic Design](http://bradfrost.com/blog/post/atomic-web-design/) methodology. It's progressive, which means that you can start with the basic boilerplate and try the other features when you are comfortable.
 
-What's new:
-  - added svg-sprite system
-[generator-yeogurt@2.0.0](https://github.com/larsonjj/generator-yeogurt)
+- **[Demo](https://arc.js.org)**
+- **[Documentation](https://github.com/diegohaz/arc/wiki)**
 
-## Description
+<br />
 
-This is an example readme file.
-Describe your site/app here.
+> **Shameless self promotion** 💡: I'm working on a UI toolkit built on top of React and styled-components. That's currently an experimental project, but I have plans to integrate it with ARc and other projects of mine in the future. Go have a look: https://github.com/diegohaz/reas
 
-## Technologies used
+<br />
 
-JavaScript
-- [Browserify](http://browserify.org/) with ES6/2015 support through [Babel](https://babeljs.io/)
-- [Node](https://nodejs.org/)
+## Branches
 
-Styles
-- [Sass](http://sass-lang.com/) via ([node-sass](https://github.com/sass/node-sass))
+- ### [`master`](https://github.com/diegohaz/arc)
 
-Markup
-- [Jade](http://jade-lang.com/)
+  The basic stack with [React](https://facebook.github.io/react/), [Webpack](https://github.com/webpack/webpack), [react-router](https://github.com/ReactTraining/react-router) and [Jest](https://facebook.github.io/jest/).
 
-Optimization
-- [Imagemin](https://github.com/imagemin/imagemin)
-- [Uglify](https://github.com/mishoo/UglifyJS)
+  - ### [`redux`](https://github.com/diegohaz/arc/tree/redux) <sup><sub>([compare](https://github.com/diegohaz/arc/compare/master...redux?diff=split#files_bucket))</sub></sup>
 
-Server
-- [BrowserSync](http://www.browsersync.io/)
+    Master plus [redux](https://github.com/reactjs/redux), [redux-saga](https://github.com/yelouafi/redux-saga) and [redux-form](https://github.com/erikras/redux-form).
 
-Linting
-- [ESlint](http://eslint.org/)
+    - ### [`redux-ssr`](https://github.com/diegohaz/arc/tree/redux-ssr) <sup><sub>([compare](https://github.com/diegohaz/arc/compare/redux...redux-ssr?diff=split#files_bucket))</sub></sup>
 
-Automation
-- [Gulp](http://gulpjs.com)
+      Redux plus [Server Side Rendering](https://github.com/reactjs/redux/blob/master/docs/recipes/ServerRendering.md)
 
-Code Management
-- [Editorconfig](http://editorconfig.org/)
-- [Git](https://git-scm.com/)
+## Why
 
-## Short commands (Yeomas notice)
+I've been a web developer for the past 14 years and after dealing with IE vs. Netscape wars, `<table>` layouts and flash websites, I can say that we are now living in the best moment in web development. Web components are awesome and React makes it better.
 
-For use commands install YEOMAN.
+React encourages you to create very small and pure components. However, as your project grows, you will have an increasingly complex components folder. At some point, this will be really huge and hard to maintain.
 
-I using atomic design, so this commands for me:
+I had a React project with more than 100 components in the `components` folder. The first approach I tried to organize it was separating the components by domain (described [here](http://marmelab.com/blog/2015/12/17/react-directory-structure.html)), but I realized that most of my components didn't belong to any domain, but were shared. This meant that my problems just moved to the `commons` folder.
 
-Modules
-`yo yeogurt:module --atomic=atom <your module name>`: create atom module (like UI element)
-`yo yeogurt:module --atomic=molecule <your module name>`: create molecule module (like component)
-`yo yeogurt:module --atomic=organism <your module name>`: create organism module (like container)
+The [Atomic Design](http://bradfrost.com/blog/post/atomic-web-design/) approach comes handy to solve this problem because it considers the reusability through composition, *which is actually what React is*. You will have your minimal/stylish components in one folder, pages in another and so on.
 
-Other
-`yo yeogurt:page <your page name>`: create page
-`yo yeogurt:layout <your layout name>`: create layout
-`yo yeogurt:page <your page name> --layout=<your layout name>`: create page with special layout
+## Setup
 
-## Automated tasks
+### 1. Get the source code
 
-This project uses [Gulp](http://gulpjs.com) to run automated tasks for development and production builds.
-The tasks are as follows:
+Just clone one of the ARc [branches](#branches):
+```sh
+$ git clone -b master https://github.com/diegohaz/arc my-app
+$ cd my-app
+```
 
-If you using npm:
-`npm run dev`: for development
-`npm run build`: for production
+You will probably want to remove ARc git history and start a brand new repository:
+```sh
+$ rm -rf .git
+$ git init
+```
 
-`gulp --production`: Same as `gulp serve --production` also run `gulp test` and  not boot up production server
+### 2. Install dependencies
 
-`gulp serve`: Compiles preprocessors and boots up development server
-`gulp serve --open`: Same as `gulp serve` but will also open up site/app in your default browser
-`gulp serve --production`: Same as `gulp serve` but will run all production tasks so you can view the site/app in it's final optimized form
+```sh
+$ npm install
+```
 
-`gulp test`: Lints all `*.js` file in the `source` folder using eslint
+### 3. Run the app
 
-***Adding the `--debug` option to any gulp task displays extra debugging information (ex. data being loaded into your templates)***
+```sh
+$ npm run dev
+```
+
+It will start the development server with [HMR](https://webpack.github.io/docs/hot-module-replacement) on top of it.
+
+> [http://localhost:3000](http://localhost:3000) — Development server<br>
+> [http://localhost:3001](http://localhost:3001) — Webpack assets server (for `redux-ssr` only)<br>
+
+Now you can open [http://localhost:3000](http://localhost:3000) in browser and start developing.
+
+## Contributing
+
+When submitting an issue, use the following patterns in the title for better understanding:
+```bash
+[v0.3.1-redux] Something wrong is not right # the v0.3.1 release of the redux branch
+[redux] Something wrong is not right # the actual code of the redux branch
+Something wrong is right # general, related to master or not directly related to any branch
+```
+
+PRs are very appreciated. For bugs/features consider creating an issue before sending a PR.
+
+## License
+
+MIT © [Diego Haz](https://github.com/diegohaz)
